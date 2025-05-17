@@ -2450,8 +2450,12 @@ procedure printparms;
 
 
 begin {program nf3} 
-  reset(pcdata,'pcdata'); 
-  rewrite (pcout,'pcout');
+   assign(pcdata, 'pcdata');
+   reset(pcdata);
+   assign(pcout, 'pcout');
+   rewrite(pcout);
+   { reset(pcdata,'pcdata'); }
+   { rewrite (pcout,'pcout'); }
    Iter := 0;
    Done := false;
    Trunked := false;

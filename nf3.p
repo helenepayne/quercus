@@ -2301,8 +2301,11 @@ begin
 end; {proc}
 begin {program nf3}
 {unix initialization}
-  reset(sibships,'sibships'); 
-  rewrite (Analysis,'Analysis');
+  assign(sibships, 'sibships');
+  reset(sibships);
+  assign(Analysis, 'analysis');
+  rewrite(Analysis);
+
 {Vax initialization} 
   {open ( sibships, 'sibships', history := readonly );
   reset( sibships );

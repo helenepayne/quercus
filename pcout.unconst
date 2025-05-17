@@ -1,0 +1,146 @@
+  This is an REML analysis.
+           1is fixed effect number           1of factor            1
+           1is fixed effect number           1of factor            2
+           2is fixed effect number           2of factor            2
+           3is fixed effect number           3of factor            2
+           4is fixed effect number           4of factor            2
+           5is fixed effect number           5of factor            2
+           6is fixed effect number           6of factor            2
+           2is fixed effect number           2of factor            1
+
+ At iteration     0
+
+ The current parameter values:  
+ Additive, population 1:  
+ 0.000
+ Additive, population 2:  
+ 0.000
+ Environmental, population 1:  
+ 1.000
+ Environmental, population 2:  
+ 1.000
+ Dominance, population 1:  
+ 0.000
+ Dominance, population 2:  
+ 0.000
+LogLike       -796.7258
+
+ At iteration     1
+
+ The current parameter values:  
+ Additive, population 1:  
+ 0.109
+ Additive, population 2:  
+ 0.252
+ Environmental, population 1:  
+ 2.728
+ Environmental, population 2:  
+ 1.212
+ Dominance, population 1:  
+ 0.441
+ Dominance, population 2:  
+ 1.930
+LogLike       -524.9395
+
+ At iteration     2
+
+ The current parameter values:  
+ Additive, population 1:  
+ 0.076
+ Additive, population 2:  
+ 0.180
+ Environmental, population 1:  
+ 2.686
+ Environmental, population 2:  
+ 1.298
+ Dominance, population 1:  
+ 0.512
+ Dominance, population 2:  
+ 1.893
+LogLike       -524.9174
+
+ At iteration     3
+
+ The current parameter values:  
+ Additive, population 1:  
+ 0.084
+ Additive, population 2:  
+ 0.204
+ Environmental, population 1:  
+ 2.689
+ Environmental, population 2:  
+ 1.307
+ Dominance, population 1:  
+ 0.502
+ Dominance, population 2:  
+ 1.864
+LogLike       -524.9164
+    At iteration    4
+
+   *** The unconstrained analysis converged with the following results ***
+   The log likelihood is -524.9164
+   The mean of each trait is
+         7.646945
+   The effect of the fixed factors is
+   (in the order given, levels within factors)
+Factor:    1 Level:    1 Label:    1
+has fixed factor effect  0
+Factor:    1 Level:    2
+ Label:    2
+has fixed factor effect       -0.928549
+Factor:    2 Level:    1 Label:    1
+has fixed factor effect  0
+Factor:    2 Level:    2
+ Label:    2
+has fixed factor effect        0.017682
+Factor:    2 Level:    3
+ Label:    3
+has fixed factor effect       -0.170606
+Factor:    2 Level:    4
+ Label:    4
+has fixed factor effect       -0.628740
+Factor:    2 Level:    5
+ Label:    5
+has fixed factor effect       -3.271790
+Factor:    2 Level:    6
+ Label:    6
+has fixed factor effect       -3.474568
+      7.64694
+     -0.92855
+      0.01768
+     -0.17061
+     -0.62874
+     -3.27179
+     -3.47457
+
+additive genetic components for population 1
+    0.0844
+
+additive genetic components for population 2
+    0.2044
+
+environmental components for population            1
+    2.6894
+
+environmental components for population            2
+    1.3071
+
+
+dominance components for population            1
+    0.5016
+
+dominance components for population            2
+    1.8636
+
+
+    Large-sample var-cov matrix of the estimates
+      0.060846     -0.000000      0.026573      0.000000     -0.075973     -0.000000
+                    0.286971      0.000000      0.112149     -0.000000     -0.340986
+                                  0.298556     -0.000759     -0.274670      0.000212
+                                                0.769034      0.000211     -0.963707
+                                                              0.376394     -0.000059
+                                                                            1.473091
+                                                                                    
+  The test statistic comparing two likelihoods is given by twice
+  their difference and is compared to Chi-square with df given by the 
+  number of parameters specified by the hypothesis.

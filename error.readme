@@ -1,0 +1,28 @@
+This is a file of errors found and corrections made.  Pick it
+up from time to time, especially if you are having trouble.
+
+1.  fend.p collapsing if numbering is not consecutive.  Correction 8-29-94.
+2.  pcrf1.p not compiling in sun pascal because of identifier FamArray
+     (should be Famarray) at line 437.  Corrected 8-29-94.
+3.  Output format improved in nf3.p and nf6.p; more diagnostic output for non-
+     positive definite V matrices. 9-6-94.
+4.  nf6.p now has the option of including inbred founders (F=1) as long
+     as they're not observed. 9-8-94.
+5.  Problems with HP (and maybe others).  Variable I not locally declared in
+     Getphtypes.  Correction 1-4-95.  HP pascal and Dec Pascal use
+     single precision real (sun uses double).  This may result in 
+     bad performance on ill conditioned matrices.  We have yet to see
+     a documented problem with this, but it's worth knowing.  To correct you
+     must define all reals as longreal.  The p2c translator uses double 
+     precision.
+6.  New and improved ComputeBig procedure reduces computations by a
+     factor of 2.  This should have a big effect on runtimes of the
+     whole program. (1-4-95)
+7.  Wrong sibs constant in pcrf1.p for demo data.  Should be 270 or
+     greater.  Corrected 1-4-95.
+8.  Bug in initialization of constraints in pcrf1.p.  Corrected 1-10-95.
+9.  Bug in numbering when founders have nonconsecutive numbers, bug
+    in initialization of nf6 when starting value option is used or
+     when machine doesn't initialize arrays to 0.  Corrected 2-15-95.
+10. Bug introduced into fend.p in Getphtypes.  An extra fixed effect was
+    being read.  Corrected 3-23-95.

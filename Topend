@@ -1,0 +1,93 @@
+nvarcov =            1
+Total number of (co)variances ("maxnparm")    6 for nf6.p
+Total number of (co)variances ("maxnparm")    3 for nf3.p
+nf = 1
+p =   10
+family           1 has           5
+family           2 has           5
+family           3 has           7
+family           4 has           7
+family           5 has           7
+family           6 has           7
+family           7 has           7
+family           8 has           7
+family           9 has           5
+family          10 has           5
+family          11 has           7
+family          12 has           9
+family          13 has           7
+family          14 has           7
+family          15 has           5
+family          16 has           7
+family          17 has           5
+family          18 has           7
+family          19 has           7
+family          20 has           7
+family          21 has           7
+family          22 has           5
+family          23 has           7
+family          24 has           7
+family          25 has           7
+family          26 has           7
+family          27 has           5
+family          28 has           7
+family          29 has           7
+family          30 has           6
+family          31 has           7
+family          32 has           7
+family          33 has           7
+family          34 has           7
+family          35 has           7
+family          36 has           7
+family          37 has           7
+family          38 has           7
+family          39 has           7
+family          40 has           7
+sibs=           9
+rhsibs=           4
+fsibs=           1
+hsibs=           3
+rfsibs=           1
+nf3.p only needs rfsibs and rhsibs 
+non-missing observations for family           1:           2
+non-missing observations for family           2:           2
+non-missing observations for family           3:           3
+non-missing observations for family           4:           3
+non-missing observations for family           5:           3
+non-missing observations for family           6:           3
+non-missing observations for family           7:           3
+non-missing observations for family           8:           3
+non-missing observations for family           9:           2
+non-missing observations for family          10:           2
+non-missing observations for family          11:           3
+non-missing observations for family          12:           4
+non-missing observations for family          13:           3
+non-missing observations for family          14:           3
+non-missing observations for family          15:           2
+non-missing observations for family          16:           3
+non-missing observations for family          17:           2
+non-missing observations for family          18:           3
+non-missing observations for family          19:           3
+non-missing observations for family          20:           3
+non-missing observations for family          21:           3
+non-missing observations for family          22:           2
+non-missing observations for family          23:           3
+non-missing observations for family          24:           3
+non-missing observations for family          25:           3
+non-missing observations for family          26:           3
+non-missing observations for family          27:           2
+non-missing observations for family          28:           3
+non-missing observations for family          29:           3
+non-missing observations for family          30:           3
+non-missing observations for family          31:           3
+non-missing observations for family          32:           3
+non-missing observations for family          33:           3
+non-missing observations for family          34:           3
+non-missing observations for family          35:           3
+non-missing observations for family          36:           3
+non-missing observations for family          37:           3
+non-missing observations for family          38:           3
+non-missing observations for family          39:           3
+non-missing observations for family          40:           3
+ Over all families the largest # of observations is 
+    4  ( = pos )

@@ -430,8 +430,10 @@ procedure Cleanup (var charnum: integer; var ntrnc: integer;
 
 begin {program fend}
 {unix initialization}
-  reset(sibships,'sibships');
-  rewrite (Topend,'Topend');
+   assign(sibships, 'sibships');
+   reset(sibships);
+   assign(Topend, 'Topend');
+   rewrite(Topend);
 {Vax initialization}
   {open ( sibships, 'sibships', history := readonly );
   reset( sibships );

@@ -1,0 +1,15 @@
+
+# ignore build objects
+*.o
+*.ppu
+
+# ignore compiled binaries
+fend
+nf3
+nf6
+pcrf1
+
+# Ignore data specific outputs
+Topend
+analysis
+sibships

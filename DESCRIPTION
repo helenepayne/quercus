@@ -6,7 +6,8 @@ Date: 1994-07-11
 Authors@R: c(
     person("Ruth G.", "Shaw", role = "aut",
            comment = "Original Quercus programs"),
-    person("Frank H.", "Shaw", role = "aut",
+    person("Frank H.", "Shaw", role = c("aut", "cre"),
+           email = "fshaw@ima.umn.edu",
            comment = "Original Quercus programs"))
 Description: R interface to the Quercus programs for maximum likelihood (ML)
     and restricted maximum likelihood (REML) estimation of genetic and

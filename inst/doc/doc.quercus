@@ -1,0 +1,447 @@
+14 July, 1994
+ 
+   This is the documentation for the programs in the program package,
+Quercus, developed by Ruth G. Shaw and Frank H. Shaw.  All of the programs 
+employ the method of maximum likelihood (Shaw 1987, Evolution 41: 812-826 
+and references therein) to obtain estimates of fixed effects and components 
+of variance for a polygenic model fitted to data on phenotypic values for 
+individuals whose genetic relationships are known.  The program, nf6.p, 
+estimates the parameters for data in a diallel (complete 
+or incomplete) design involving reciprocals.  Although nf6.p can also be 
+used to analyse data from any simpler design, the program, nf3.p, is 
+computationally more efficient for estimating the parameters of a model 
+having no more than three components.  It is therefore appropriate for data 
+in many commonly used designs, including parent-offspring and nested sib 
+designs.  The instructions below apply to both programs, with exceptions as 
+indicated.  The program pcrf1.p estimates three components for each of
+two separate populations, and is capable of constraining any of the
+additive covariance components to be the same in both populations (see
+Shaw, 1991).  Use of this program follows that of nf3 for the most part.  
+A separate paragraph before the section on error messages below details the
+differences.
+
+   The programs are written in standard Pascal and are provided as
+source code. They estimate genetic and 
+environmental variances and covariances and also fixed effects
+of the bio model (Cockerham and Weir 1977).  They should 
+compile without trouble under Berkeley Unix or VMS.  To run under VMS, 
+you must assign external filenames to the ones the program uses (sibships
+and Analysis) when you invoke the program for the analysis.  If you have
+trouble with this, computer consultants should be able to help you. 
+   It is also possible to translate these programs into C and compile them
+in that language.  The Pascal to C translator that we have used is that
+written by Dave Gillespie (daveg@csvax.cs.caltech.edu.)  The C version
+of this code has more efficient memory management and larger datasets will
+run in C than are tractable in Pascal.  P2C is available over the Internet
+via anonymous ftp.
+
+It is necessary to modify the constants at the beginning of the programs.  
+The constants 
+must be at least as large as demanded by the data, but it is not necessary 
+that they correspond to the size of the data exactly.  Complaints 
+like "array index out of bounds" indicate that the dimensions are too small.
+Included in the same directory as the analysis programs is the program fend.p.
+fend.p can be used to make a first pass through the data in order to determine 
+the minimum size required for the constants.  Minimum values for the constants 
+are as follows:
+
+1)  r = the number of traits to be analysed.  This may be fewer than the number
+of traits in the input file (see below).  The number of traits that are
+actually analysed is specified in the input file as nchar.  r >= nchar.
+
+2)  nvarcov = r (r + 1)/2.  This is the number of variance and covariance
+components associated with each random factor.
+
+3)  maxnparm = k * nvarcov.  This is the maximum number of variance and
+covariance components to be estimated.  If nf6.p or pcrf1.p is being used, 
+k = 6; if nf3.p is being used, k = 3.
+
+4)  emaxnparm = maxnparm + nconstr (see below).
+
+5)  f = the number of "extended families".  This is the number of distinct
+groups of interrelated individuals.  In the case of the diallel data supplied, 
+f = 1.
+
+6) sibs = the maximum number of individuals in an extended family, including
+unmeasured individuals (i.e., often parents).
+
+7)  fsibs = g - n, where g is
+the maximum number of individuals in a fullsib group (i.e. a single cell of 
+the diallel table), and n is the number of missing data values.  In particular,
+fsibs is the number of observed individuals related by dominance or, in nf3,
+common environment.
+
+8)  hsibs = h - n, where h is defined as
+the maximum number of progeny related through a single father or mother, and
+n is the number of missing data values.
+
+9)  rhsibs = k - n, where k is the maximum number of progeny 
+related through a single parent, whether as sire or dam.  Thus, rhsibs is no 
+greater than m * fsibs, where m = the maximum number of mates for any parent.
+n is the number of missing data values.
+
+10)  rfsibs is the maximum number of individuals in a 
+reciprocal full sib group.  Thus, rfsibs is no greater than 2*fsibs.  n is the 
+number of missing data values.
+
+11)  pos = r * (sibs) - n, where r is defined above and n is the number of 
+missing data values.
+
+12)  nmax = the maximum total number of individuals in the dataset.
+
+13)  missing is the cutoff value for observed data.  The value of missing
+here MUST BE GREATER THAN the missing value used in the data, and less than
+all values actually observed.  The default value for missing is -98.  Thus, 
+the value for missing data in the input file is -99 (but could be any value
+less than -98).
+
+14)  epsilon = the stopping criterion for the maximization.  
+When the difference of successive likelihoods < delta, the program 
+stops and prints results.
+
+15)  maxround = the maximum number of iterations permitted.  If maxround is
+reached before the difference between successive likelihoods < delta, then
+the program stops, printing a warning and current estimates.
+
+16)  nf = the maximum number of fixed factors.  This must be at least 1.
+
+17)  p = the maximum number of fixed effects to be estimated, i.e. r * (the 
+number of levels of each factor summed over the factors). The constant
+p must be at least r, the number of traits, since means for each
+trait are automatically estimated.
+
+18)  ceo: must be either 1 or 4.  This constant, only in nf3.p, 
+provides an option to estimate 
+components attributable to common environment, rather than dominance.  If
+ceo=1, then the dominance model is estimated; if it is 4 then the common
+environment model is analysed.  Two individuals are treated as having
+a common environment if they share *both* parents.
+
+19) nconstr:  The number constraints carried by the cutting plane
+algorithm in enforcing feasibility.  You will probably be safe if you use
+nconstr = maxnparm.
+
+20) ifound:  (nf6 only) Option to include fully inbred founders.  If ifound = 0 
+then the founders will be treated as noninbred.  If ifound = 1 then the founders
+will be treated as fully inbred.  Only noninbred founders can be observed;
+analysis of observed inbreds requires a model with considerably more complexity.
+ 
+
+Most of the above constants need to be set for fend.p as well, but you
+are at liberty to guess high, since only a few of the arrays are assembled.  
+Output from fend is to the screen and into the file Topend.  Edit the
+top lines of nf6 or nf3 using this information to set the constants.
+
+   For both analysis programs and also for fend.p, the data should be in a 
+file called 'sibships'.   That file should contain the following information 
+in order:
+
+Line 1:   5 items: 
+a) A designation of the type of analysis you want, '1' 
+for maximum likelihood or '2' for restricted maximum likelihood.
+(The former gives biased estimates having smaller variances, the latter the 
+converse.  The latter gives estimates identical to ANOVA in the balanced 
+case. see Shaw, 1987, Evolution 41: 812-826)  
+b) The number of characters to be analysed, nchar (may be less than the number 
+of characters in the dataset; the program reads and analyses the first 
+nchar traits.) 
+c) the number of categorical fixed factors in the data (apart from the 
+grand mean). 
+d) 1 or 0 depending on whether or not feasibility constraints are to be 
+imposed.  If 1 is specified, the program will constrain the 
+variance-covariance matrix of estimates to be positive definite (ie all
+variance components will be nonnegative and the correlations will be in
+the feasible range of [-1,1]).  This is a large scale iterative process in
+which the program first finds an unconstrained maximum and then constrains
+the estimates and runs again.  Several loops may be required before arrival
+at feasible estimates.  (See Shaw and Geyer, 1993 
+for details of this algorithm.  We'd be happy to send you a copy)
+If 0 is specified here, no restriction is placed on the values of the 
+variances.  Whether or not feasibility constraints are invoked, any parameter 
+may be constrained to 0 for the whole analysis (see below).
+e) 0 or 1 depending on whether or not you want to specify starting values.
+If you do not  wish to specify starting values (to start at the default values),
+use zero.  If 1 is specified, the starting values must begin on line 2.
+The order of the starting values is the same as that for the constraints
+given below.  The default starting values are zero for everything except the
+environmental covariance matrix which is the identity.  This results in
+an identity V matrix for the first iteration.
+
+Line 2 (or on a new line following the starting values):  
+The number of components you wish to eliminate (constrain) from the 
+full model. This value is followed by the indices of the components to be 
+constrained, considered in the following order: additive, environmental, 
+dominance, maternal, paternal, and nuclear x extranuclear interaction.  
+Within each of these types of components, the elements of each matrix are 
+indexed in order of the elements of an upper triangular matrix (i.e., 
+for additive components with three characters: VA of trait 1, CovA of 
+traits 1 and 2, CovA of traits 1 and 3, VA of trait 2, CovA of traits 2 
+and 3, VA of trait 3). For nf3.p, the sequence runs: additive, environmental, 
+dominance (or common environment).  Thus, for example, in a two character
+case if you want to constrain to 0 the dominance covariance between traits 1 
+and 2, specify 1 8).
+   This option may be used to constrain values for three distinct purposes.  
+1)  In order for the program to complete the analysis, you MUST constrain
+components that are inestimable from the data at hand.  For example, a
+full sib design, without measures on parents, permits estimation of no more
+than two types of components, environmental and genetic, in the broad sense 
+(i.e., confounding variance due to additive, dominance, and maternal effects).
+To analyse this design using nf3, either VA or VD must be explicitly 
+constrained.  
+2) If you choose to conduct an analysis in which all variance components 
+are >= 0 (what we have called a "constrained" analysis), then you may use 
+this option to eliminate variance components (and their associated 
+covariances) that, in an unconstrained analysis, have been estimated 
+as negative.  However, the feasibility option invoked in line 1 uses a 
+more rigorous method to accomplish this.
+3) In addition, this option is used to make significance tests of any null
+hypothesis that a single component (of variance or covariance) or every one 
+of a given set of components is equal to zero. (See below.)
+
+Line 3ff: The data from the pedigree begin on this line, one line for 
+each individual in the pedigree, including parents of the progeny
+generation, whether or not they are measured.  Each individual has:
+
+1)  an ID number (these must be consecutive through the whole dataset, 
+and the sequence of ID numbers must include the ID's for both parents).
+
+2)  the ID# of the paternal parent, 0 if the individual is a founder 
+(i.e., parents are unknown.)
+
+3)  the ID# of the maternal parent, 0 if the individual is a founder 
+(i.e., parents are unknown.)
+
+4)  If there are fixed effects, an integer identifier for the level 
+of the categorical 
+fixed factor(s).  The number of columns giving fixed effect levels must 
+match the number of fixed factors given in line 1.  In the example data, 
+there are no fixed effects, apart from the grand mean.  In the program 
+pcrf1.p there must be at least one fixed factor, the population number.  
+This must be the first fixed factor if there are any others.
+
+5)  the phenotype(s).  There should be at least nchar of them, where
+nchar is the second integer on line 1.  The first nchar data values will
+be read from each line.
+
+Individuals in two generations must be included, whether or not the parents 
+were measured.  (It is straightforward to extend the analysis to more 
+generations, but this version of the program will not properly accommodate 
+such data.) Every offspring must have ID#s for two parents specified, 
+in order to establish the pedigree.  The ID#s for the parents of the
+"founder" generation, in turn, should be 0.  Where any phenotype is unmeasured 
+on a given individual, the phenotypic value should be -99.0.  (You can change 
+this to another value by changing the value of the constant, 'missing', at the 
+beginning of the program, but be careful, this is the source of many
+frustrating user errors).  
+
+After all the data, there must be a line that contains only a zero.  You can 
+check to make sure that the sorting into families is being done properly by 
+ensuring that the procedure called "PrintFams" executes (it is commented 
+out in the distributed version).  The program will then give a listing 
+of all the data in the order received.  In each line there will also be values
+for next paternal sib (NPS), next maternal sib (NMS), and family ID number 
+(FamID) immediately before the value of the first character.  (Here again, 
+"family" refers to the extended family, the collection of all individuals 
+that are linked in a chain of genetic relationship.  Thus, with a single 
+diallel data structure, as in the example, there is only a single family.) 
+All the results of the analysis, including this list, will be put into a file 
+called 'Analysis'.
+
+   As noted above, the nf6.p program gives estimates for six types of variance 
+and covariance components available from a diallel cross with reciprocals (see
+Cockerham and Weir, 1977, Biometrics 33: 187-203).  These are additive, 
+dominance, environmental, maternal (non-nuclear), paternal (non-nuclear), and 
+nuclear x extranuclear interaction.  The parameterization in terms of the 
+"causal" components is related to that of the "observational" components in 
+Cockerham and Weir's (1977) 'bio' model, as follows: 
+
+                          Additive = 4*sigma^2 
+                                              n
+
+                          Dominance = 4*sigma^2 
+                                               t
+
+                          Maternal = sigma^2 
+                                            m
+
+                          Paternal = sigma^2 
+                                            p 
+
+                          N x EN interaction = sigma^2 
+                                                      k
+
+                          Environmental = sigma^2 - VA/2 - 3VD/4
+
+(see Falconer, 1989, for the distinction between observational and causal
+components of variance).  Please note that these genetic interpretations of 
+the causal components assume that there is no inbreeding in either the parental 
+or progeny generation.  
+
+   Data from designs less elaborate than the diallel can be analysed using 
+nf6.p by explicit elimination of the variance components that are not 
+estimable from the design at hand, using line 2 (see above).  Thus, to analyse 
+data on one trait from a factorial mating design, one could specify 
+2 5 6 (2 components to be eliminated: paternal and nuclear x extranuclear 
+interactions).  Similarly, data from a nested mating design could be 
+analysed by constraining three types of components, but these analyses 
+can be accomplished more efficiently (using less space) with the nf3.p program.
+
+   In addition to this documentation file (nf36.doc) and the programs (fend.p,
+nf6.p, and nf3.p), example datafiles and the resulting output files are 
+included in the directory.  The sample set of data (sibships.democw)
+is taken from Cockerham and Weir 1977 Biometrics, Appendix C.  Its analysis is
+given in Analysis.democw.  (N.B. In this example, the parents were, in fact,
+inbreds.  Failure to account for this leads to estimates of VE < 0).  A 
+simulated dataset suitable for the three-component analysis of nf3.p is given 
+in sibships.demo2.  It is analysed with a model including dominance 
+(Analysis.demo2).
+
+Hypothesis Testing
+  
+Method 1: Chi-Squared Comparison
+
+The log likelihood (Lmax) for the unconstrained estimates, and L0, 
+the log likelihood of the estimates under the null hypothesis,
+must be obtained.  L0 is obtained
+by constraint to zero of the components for which the test is desired
+(see instructions for line 2, above).  Inestimable components must be
+constrained to zero in both analyses.
+If the unconstrained (alternative model) and the constrained (null 
+hypothesis model) both analyses converged with feasible estimates,  
+the asymptotic 
+distribution of twice (Lmax - L0 ) is distributed as chi-square with v df, 
+where v is the number of additional components constrained in the null 
+hypothesis.  
+
+Method 2: The asymptotic parametric bootstrap
+
+  If the estimates for either the null or
+alternative model require constraints to assure feasibility, or if the
+null hypothesis is that a random factor is not significantly greater than
+(or less than) zero, method 1 is not valid.
+An alternative method is called the asymptotic parametric 
+bootstrap.  It is developed in detail in Shaw and Geyer (1993).  It is
+hoped that this algorithm will soon be available as part of the Quercus
+package.
+
+
+The program pcrf1.p works the same as nf3.p with the following exceptions:
+
+There are now twice as many parameters to be estimated since parameters
+are estimated for each of two populations.  The order of the parameters
+is additive for population 1, additive for population 2, environmental
+for pops 1 and 2, and dominance/common environment for pops 1 and 2.
+The first fixed effect is necessarily the population number.
+
+The input file is called pcdata instead of sibships.  It differs from
+sibships in two respects.
+1) On a new line after the line containing the constraint indices, you
+must enter the indices of the G matrix you wish to constrain to be
+the same in both populations.  As in the line denoting constraints to
+zero just above it, the first integer is the number of constraints.  Thus,
+a pcdata file beginning
+2 2 1 0 0
+4 13 14 16 17
+3 1 2 3
+etc
+stipulates a 2 trait dataset with only one fixed factor (this must be
+the population), in which the dominance variance for the first
+trait and the covariance are constrained to zero in both populations
+and in which the whole G matrix will be constrained to be the same in
+both populations.
+A pcdata file beginning
+2 2 1 0 0 
+0
+0
+etc
+has nothing constrained to zero and will estimate the G matrices of
+the two populations separately.
+
+The program fend can be used to find the correct constant numbers. To
+use it you must copy pcdata to sibships and delete the line specifying
+the G matrix constraints.
+
+Included with the source code for pcrf1.p are the input file pcdata.demo
+and the output files for unconstrained and constrained G matrix runs,
+pcout.unconst and pcout.const. The example dataset is that for tiller dry
+weight used in Shaw and Billington (1991, Evolution 45:1287).
+
+Frustrations and Error Messages:
+
+  These programs are not magic!  Patience and effort are needed
+for almost every dataset.  Don't give up!
+
+  The most common error made by users of these programs is improperly 
+set constants.  Different operating systems complain in different ways
+when subscripts are out of range.  If you get an error message
+like "segmentation fault", you probably have constants set too low.
+Use fend!  If you are running in C, the program will just keep on 
+running if the violation in array size is small.  The results, of
+course, are garbage, so in C you need to be extra vigilant.
+
+   The "segmentation fault" error message also comes about when the dataset
+is simply too big.  The unix "unlimit" command sometimes will remedy this,
+otherwise you need a bigger machine or, as above, you need to translate
+into C and run in that language.  Again, it is important to use
+fend, since this gives the minimum constant values.
+
+  If you can't figure out why the constants are a given size,
+you can have the program print all that it knows by removing
+the brackets around the PrintFams procedure and the brackets
+around the calls to it near the end of the program.  PrintFams
+rewrites your data as it has read it with family information.
+It writes to the Analysis file.
+
+  Convergence problems are quite common and are often the result
+of sparse datasets.  If you are experiencing this, reduce to
+an additive and environmental model.  Analyse one trait at a time
+before combining for multivariate analysis.  In our example dataset,
+six components are estimated using 112 observations, but these
+data are perfectly balanced. Unbalanced datasets of similar size
+may prove intractable.  Remember that the number of estimated
+components goes up with the square of the number of traits.  Many
+users have crashed trying to analyse 5 traits (90 components) with
+100 observations on each (500 observations).
+
+ "The Variance matrix is not positive definite"
+  This arises when the program estimates new parameter values which
+result in a non-positive definite variance-covariance (V) matrix.  The
+program will terminate here or, if this happens after a new constraint
+has been applied, starting values for the parameters are substituted
+and the likelihood is calculated again.  In the former case, the
+components should be examined and large negative values should be
+constrained to zero in a new run.
+  It sometimes occurs that the imposition of a constraint in hypothesis
+testing causes the V matrix to be non-positive definite on the first
+iteration.  It helps to give as starting values the estimates from the
+unconstrained run.
+
+ "The info matrix is singular"
+  This happens when one of the random factors is inestimable.  It
+also can happen if the data are incorrectly entered.  In the case of
+the former, check your design to make sure there is no confounding
+of effects.  Constrain all but a few components from the model
+to start with.  In the case of the latter cause (much more common), 
+check carefully your sibships file and the diagnostics written by 
+the program after the data have been read.
+
+ Problems or questions?  We're ready and willing to help.
+
+ This work has been sponsored by NIH (GM09664-02) and NSF (BSR-8817756,
+BSR-8905808, and DIR-9112842).  We owe an incalculable debt to Joe Felsenstein,
+who served as the original sponsor of this project.  We have relied very
+heavily on the path-breaking work of Robin Thompson and Karin Meyer.  The
+programs have been made much more convenient to use as a result of the
+constructive suggestions of a number of intrepid and indefatigable users.
+Chief among these is Bruce Riska.  We gratefully acknowledge the involvement
+of all these contributors.
+
+
+
+	Ruth G. Shaw and Frank H. Shaw
+        Department of Ecology, Evolution, and Behavior,
+        University of Minnesota
+        shaw@superb.ecology.umn.edu
+        fshaw@ima.umn.edu
+        rshaw@ecology.ecology.umn.edu
+

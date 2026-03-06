@@ -1,0 +1,29 @@
+Package: quercus
+Type: Package
+Title: Maximum Likelihood Analysis of Quantitative Genetic Data
+Version: 0.1.0
+Date: 1994-07-11
+Authors@R: c(
+    person("Ruth G.", "Shaw", role = "aut",
+           comment = "Original Quercus programs"),
+    person("Frank H.", "Shaw", role = "aut",
+           comment = "Original Quercus programs"))
+Description: R interface to the Quercus programs for maximum likelihood (ML)
+    and restricted maximum likelihood (REML) estimation of genetic and
+    environmental variances and covariances from two-generation pedigree data.
+    Four programs are provided: nf3 estimates three variance components
+    (additive, dominance/common-environment, environmental) for nested or
+    parent-offspring designs; nf6 estimates up to six components from diallel
+    data; pcrf1 compares genetic variance-covariance matrices between two
+    populations; fend determines minimum array dimensions for a dataset.
+    The underlying method is described in Shaw (1987)
+    <doi:10.1111/j.1558-5646.1987.tb05870.x> and Shaw and Geyer (1993).
+    The original Pascal programs were written by Ruth G. Shaw and Frank H. Shaw
+    at the University of Minnesota and supported by NIH (GM09664-02) and NSF
+    (BSR-8817756, BSR-8905808, DIR-9112842).
+License: GPL-2
+Encoding: UTF-8
+LazyData: false
+RoxygenNote: 7.3.1
+Suggests:
+    testthat (>= 3.0.0)

@@ -1,0 +1,22 @@
+.claude/
+
+# Pascal build objects
+*.o
+*.ppu
+
+# Compiled binaries
+fend
+nf3
+nf6
+pcrf1
+
+# Quercus runtime output files
+Topend
+analysis
+Analysis
+sibships
+
+# R package build artifacts
+*.Rcheck/
+*.tar.gz
+.Rproj.user

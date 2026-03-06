@@ -1,0 +1,50 @@
+  This is an REML analysis.
+LogLike      -1238.2978
+LogLike       -182.2965
+LogLike       -182.2965
+    At iteration    3
+
+   *** The unconstrained analysis converged with the following results ***
+   The log likelihood is -182.2965
+   The mean of each trait is
+        16.314286
+   The effect of the fixed factors is
+   (in the order given, levels within factors)
+     16.31429
+
+   The estimates of the components are:
+    Additive
+              
+     20.418744
+              
+   Environmental
+              
+    -13.731318
+              
+   Dominance
+              
+      9.542595
+              
+   Maternal 
+              
+      3.307969
+              
+   Paternal 
+              
+      1.913356
+              
+   Higher Interactions
+              
+      4.013318
+              
+    Large-sample var-cov matrix of the estimates
+    256.265047   -121.298050     -9.112631     -1.714408    -10.677816      0.809487
+                   90.280165    -38.878985      0.250089      4.731793      4.216227
+                                 57.913734      0.809487      0.809487     -6.475894
+                                               11.596206     -3.791578     -0.404743
+                                                              8.934874     -0.404743
+                                                                            3.355922
+                                                                                    
+  The test statistic comparing two likelihoods is given by twice
+  their difference and is compared to Chi-square with df given by the 
+  number of parameters specified by the hypothesis.

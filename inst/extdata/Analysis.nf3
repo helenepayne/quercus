@@ -1,0 +1,44 @@
+  This is an REML analysis.
+LogLike       -272.6264
+LogLike       -238.4432
+LogLike       -238.4432
+    At iteration    3
+
+   *** The unconstrained analysis converged with the following results ***
+   The log likelihood is -238.4432
+   The mean of each trait is
+         0.081236
+        -0.085470
+   The effect of the fixed factors is
+   (in the order given, levels within factors)
+
+   The estimates of the components are:
+    Additive
+              
+      0.196601      0.134016
+                    0.813206
+              
+   Environmental
+              
+      0.034755      0.134609
+                    0.974764
+              
+   Dominance
+              
+      0.938617     -0.113085
+                    0.046997
+              
+    Large-sample var-cov matrix of the estimates
+      0.122560      0.021440      0.004091      0.093991      0.010331      0.001413     -0.207028     -0.028068     -0.004611
+                    0.105442      0.037818      0.010331      0.065235      0.015525     -0.028068     -0.157275     -0.045913
+                                  0.356861      0.001413      0.015525      0.183679     -0.004611     -0.045913     -0.482813
+                                                0.228582      0.021530      0.002238     -0.336299     -0.031249     -0.003320
+                                                              0.153474      0.030090     -0.031249     -0.221470     -0.043116
+                                                                            0.415866     -0.003320     -0.043116     -0.587751
+                                                                                          0.565659      0.057480      0.007096
+                                                                                                        0.382374      0.083193
+                                                                                                                      1.046082
+                                                                                                                              
+  The test statistic comparing two likelihoods is given by twice
+  their difference and is compared to Chi-square with df given by the 
+  number of parameters specified by the hypothesis.

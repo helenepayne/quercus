@@ -1,0 +1,149 @@
+  This is an REML analysis.
+           1is fixed effect number           1of factor            1
+           1is fixed effect number           1of factor            2
+           2is fixed effect number           2of factor            2
+           3is fixed effect number           3of factor            2
+           4is fixed effect number           4of factor            2
+           5is fixed effect number           5of factor            2
+           6is fixed effect number           6of factor            2
+           2is fixed effect number           2of factor            1
+
+ At iteration     0
+
+ The current parameter values:  
+ Additive, population 1:  
+ 0.000
+ Additive, population 2:  
+ 0.000
+ Environmental, population 1:  
+ 1.000
+ Environmental, population 2:  
+ 1.000
+ Dominance, population 1:  
+ 0.000
+ Dominance, population 2:  
+ 0.000
+LogLike       -796.7258
+Multiplier  1 27.3150
+
+ At iteration     1
+
+ The current parameter values:  
+ Additive, population 1:  
+ 0.169
+ Additive, population 2:  
+ 0.169
+ Environmental, population 1:  
+ 2.773
+ Environmental, population 2:  
+ 1.152
+ Dominance, population 1:  
+ 0.342
+ Dominance, population 2:  
+ 2.066
+LogLike       -525.0113
+Multiplier  1  0.3962
+
+ At iteration     2
+
+ The current parameter values:  
+ Additive, population 1:  
+ 0.092
+ Additive, population 2:  
+ 0.092
+ Environmental, population 1:  
+ 2.686
+ Environmental, population 2:  
+ 1.267
+ Dominance, population 1:  
+ 0.501
+ Dominance, population 2:  
+ 1.992
+LogLike       -524.9470
+Multiplier  1  0.5127
+
+ At iteration     3
+
+ The current parameter values:  
+ Additive, population 1:  
+ 0.113
+ Additive, population 2:  
+ 0.113
+ Environmental, population 1:  
+ 2.700
+ Environmental, population 2:  
+ 1.262
+ Dominance, population 1:  
+ 0.469
+ Dominance, population 2:  
+ 1.985
+LogLike       -524.9437
+    At iteration    4
+
+   *** The constrained analysis converged with the following results ***
+   The log likelihood is -524.9437
+   The mean of each trait is
+         7.646486
+   The effect of the fixed factors is
+   (in the order given, levels within factors)
+Factor:    1 Level:    1 Label:    1
+has fixed factor effect  0
+Factor:    1 Level:    2
+ Label:    2
+has fixed factor effect       -0.921338
+Factor:    2 Level:    1 Label:    1
+has fixed factor effect  0
+Factor:    2 Level:    2
+ Label:    2
+has fixed factor effect        0.017493
+Factor:    2 Level:    3
+ Label:    3
+has fixed factor effect       -0.170388
+Factor:    2 Level:    4
+ Label:    4
+has fixed factor effect       -0.628499
+Factor:    2 Level:    5
+ Label:    5
+has fixed factor effect       -3.271670
+Factor:    2 Level:    6
+ Label:    6
+has fixed factor effect       -3.474447
+      7.64649
+     -0.92134
+      0.01749
+     -0.17039
+     -0.62850
+     -3.27167
+     -3.47445
+
+additive genetic components for population 1
+    0.1131
+
+additive genetic components for population 2
+    0.1131
+
+environmental components for population            1
+    2.6996
+
+environmental components for population            2
+    1.2618
+
+
+dominance components for population            1
+    0.4688
+
+dominance components for population            2
+    1.9851
+
+
+    Large-sample var-cov matrix of the estimates
+      0.063903     -0.000000      0.024525      0.000000     -0.075279     -0.000000
+                    0.257904      0.000000      0.139583     -0.000000     -0.358162
+                                  0.297436     -0.000760     -0.271772      0.000212
+                                                0.800848      0.000211     -1.024373
+                                                              0.372049     -0.000059
+                                                                            1.565392
+                                                                                    
+  The test statistic comparing two likelihoods is given by twice
+  their difference and is compared to Chi-square with df given by the 
+  number of parameters specified by the hypothesis.
